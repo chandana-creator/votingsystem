@@ -1,10 +1,8 @@
 <?php
 session_start();
-include('../actions/connect.php'); 
-$query = "SELECT title FROM election WHERE status = 'active' ORDER BY start_date DESC LIMIT 1";
-$result = mysqli_query($con, $query);
-$election = mysqli_fetch_assoc($result);
-$election_title = $election ? $election['title'] : "Voting System"; // Default title
+if(!isset($_SESSION['USN'])){
+    header('location:../');
+}
 $data=$_SESSION['data'];
 if($_SESSION['Voter_Status']==1){
     $status='<b class="text-success">Voted</b>';
@@ -99,4 +97,3 @@ if($_SESSION['Voter_Status']==1){
 
 </body>
 </html>
-
